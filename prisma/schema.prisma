@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DB_URL")
+}
+
+enum Role {
+  admin
+  teacher
+}
+
+enum GroupStatus {
+  active
+  completed
+  paused
+}
+
+
+
+enum PaymentMethod {
+  cash
+  card
+  transfer
+}
+
+enum PaymentStatus {
+  paid
+  pending
+  overdue
+}
+
+
+enum About {
+  social
+  friends
+  advertising
+  other
+}
+enum OutStudent {
+  driven
+  gone
+  complete
+}
+enum Schedule {
+  days      String[]
+  startTime String
+  endTime   String
+}
+
+model Teachers {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String
+  lastName  String
+  phone     String
+  email     String?  @unique
+  password  String
+  role      Role     @default(teacher)
+  avatar    String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  groups    Group[]  @relation("TeacherGroups")
+  @@map("teachers")
+}
+
+model Student {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String
+  lastName  String
+  phone     String
+  aboutAs About  @default(other)
+  outStudent OutStudent @default(complete)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  studentGroups StudentGroup[] 
+  payments   Payment[]
+  @@map("students")
+}
+
+model Group {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  subject   String
+  teacher   Teachers     @relation("TeacherGroups", fields: [teacherId], references: [id])
+  teacherId String  @db.ObjectId
+  studentGroups StudentGroup[] 
+  schedule  Schedule
+  status    GroupStatus
+  maxStudents Int
+  price     Float
+  startDate DateTime
+  endDate   DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  payments   Payment[]
+}
+
+model StudentGroup {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  student   Student  @relation(fields: [studentId], references: [id])
+  studentId String   @db.ObjectId
+  group     Group    @relation(fields: [groupId], references: [id])
+  groupId   String   @db.ObjectId
+}
+
+
+
+
+model Payment {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  student       Student   @relation(fields: [studentId], references: [id])
+  studentId     String  @db.ObjectId
+  group         Group     @relation(fields: [groupId], references: [id])
+  groupId       String   @db.ObjectId
+  amount        Float
+  paymentDate   DateTime
+  paymentMethod PaymentMethod
+  status        PaymentStatus
+  note          String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+
+
