@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { createTeacherDto } from 'src/dtos/createTeacher.dto';
-import { addGroupDto } from 'src/dtos/addGroupDto.dto';
+import { CreateGroupDto } from 'src/dtos/addGroupDto.dto';
 
 @Controller('admin')
 export class AdminController {
@@ -23,7 +23,7 @@ export class AdminController {
     }
   }
   @Post('addGroup')
-  async addGroup(@Body() groupDto: addGroupDto) {
+  async addGroup(@Body() groupDto: CreateGroupDto) {
     try {
       return await this.adminService.addGroup(groupDto);
     } catch (error) {

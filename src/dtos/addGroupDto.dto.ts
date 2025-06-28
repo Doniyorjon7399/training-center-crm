@@ -1,32 +1,36 @@
-import { GroupStatus } from '@prisma/client';
 import {
-  IsDateString,
-  IsEnum,
+  IsString,
   IsNotEmpty,
   IsNumber,
+  IsEnum,
+  IsDateString,
   IsOptional,
-  IsString,
+  ValidateNested, // <-- Bu muhim
 } from 'class-validator';
-import { ScheduleDto } from './schedula.dto';
+import { Type } from 'class-transformer'; // <-- Bu ham muhim
+import { GroupStatus } from '@prisma/client'; // Agar `GroupStatus` enum Prisma'dan kelsa
 
-export class addGroupDto {
-  @IsString()
+import { ScheduleDto } from './schedula.dto'; // <-- To'g'ri yo'l bilan import qiling
+
+export class CreateGroupDto {
   @IsNotEmpty()
+  @IsString()
   name: string;
+
   @IsNotEmpty()
   @IsString()
   subject: string;
 
   @IsNotEmpty()
   @IsString()
-  teacherId: string; // O'qituvchining ID si
+  teacherId: string;
+
+  @ValidateNested() // Bu `ScheduleDto` ichidagi validatsiyalar ishlatilishini ta'minlaydi
+  @Type(() => ScheduleDto) // Bu JSON datani `ScheduleDto` instance'iga aylantiradi
+  schedule: ScheduleDto; // <-- Tip to'g'ri
 
   @IsNotEmpty()
-  @IsEnum(ScheduleDto) // Enum turini belgilash
-  schedule: ScheduleDto;
-
-  @IsNotEmpty()
-  @IsEnum(GroupStatus) // Enum turini belgilash
+  @IsEnum(GroupStatus) // Agar `GroupStatus` enum bo'lsa
   status: GroupStatus;
 
   @IsNotEmpty()
@@ -39,7 +43,7 @@ export class addGroupDto {
 
   @IsNotEmpty()
   @IsDateString()
-  startDate: string; // Sanani string ko'rinishida qabul qilib, keyin Date ga o'tkazish mumkin
+  startDate: string;
 
   @IsOptional()
   @IsDateString()

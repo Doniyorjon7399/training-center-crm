@@ -14,9 +14,9 @@ export class AuthController {
     @Body() loginDto: LoginDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    res.clearCookie('token');
+    res.clearCookie('edu_token');
     const user = await this.authService.login(loginDto);
-    res.cookie('token', user.token, {
+    res.cookie('edu_token', user.token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
@@ -24,7 +24,7 @@ export class AuthController {
   }
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie('token');
+    res.clearCookie('edu_token');
     return { message: 'Successfully logged out' };
   }
   @Post('forgot-password')
@@ -32,9 +32,9 @@ export class AuthController {
     @Body() emailDto: EmailDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    res.clearCookie('token');
+    res.clearCookie('edu_token');
     const data = await this.authService.forgotPassword(emailDto);
-    res.cookie('token', data.token, {
+    res.cookie('edu_token', data.token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
@@ -43,7 +43,7 @@ export class AuthController {
   @Post('forgot-password/pin')
   async forgotPasswordPin(@Body() code: CodeDto, @Req() req: any) {
     try {
-      const token = req.cookies?.token;
+      const token = req.cookies?.edu_token;
       return await this.authService.forgotPasswordPin(code, token);
     } catch (error) {
       return { message: error };
@@ -52,7 +52,7 @@ export class AuthController {
   @Post('new-password')
   async newPassword(@Body() password: NewPasswordDto, @Req() req: any) {
     try {
-      const token = req.cookies?.token;
+      const token = req.cookies?.edu_token;
       return await this.authService.newPassword(password, token);
     } catch (error) {
       return { error: error.message };

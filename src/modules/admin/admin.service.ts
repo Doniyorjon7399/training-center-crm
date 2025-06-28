@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/database/prisma.service';
 import { createTeacherDto } from 'src/dtos/createTeacher.dto';
 import bcrypt from 'bcrypt';
+import { CreateGroupDto } from 'src/dtos/addGroupDto.dto';
 
 @Injectable()
 export class AdminService {
@@ -41,5 +42,28 @@ export class AdminService {
       success: true,
     };
   }
-  async addGroup(group) {}
+  async addGroup(group: CreateGroupDto) {
+    {
+    }
+    const user = await this.prisma.group.create({
+      data: {
+        name: group.name,
+        subject: group.subject,
+        teacher: {
+          connect: { id: group.teacherId },
+        },
+        schedule: {
+          days: group.schedule.days,
+          startTime: group.schedule.startTime,
+          endTime: group.schedule.endTime,
+        },
+        status: group.status,
+        maxStudents: group.maxStudents,
+        price: group.price,
+        startDate: new Date(group.startDate),
+        endDate: group.endDate ? new Date(group.endDate) : null,
+      },
+    });
+    return user;
+  }
 }
