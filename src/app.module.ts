@@ -4,7 +4,11 @@ import { PrismaModule } from './database/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtModule, JwtModuleAsyncOptions } from '@nestjs/jwt';
 import { AdminModule } from './modules/admin/admin.module';
+import { TeacherModule } from './modules/teacher/teacher.module';
 import config from './config';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+import { AuthGuard } from './common/guards/auth.guard';
 
 @Module({
   imports: [
@@ -24,8 +28,18 @@ import config from './config';
     }),
     AuthModule,
     AdminModule,
+    TeacherModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
+    },
+  ],
 })
 export class AppModule {}

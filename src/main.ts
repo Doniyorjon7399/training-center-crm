@@ -13,8 +13,8 @@ async function bootstrap() {
   app.use(urlencoded({ extended: true }));
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
       transform: true,
+      whitelist: true,
     }),
   );
   await app.listen(process.env.PORT ?? 3000);

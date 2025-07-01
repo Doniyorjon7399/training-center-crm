@@ -1,4 +1,11 @@
-import { Body, Controller, Post, Req, Res } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Post,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from 'src/dtos/login.dto';
 import { Response } from 'express';
@@ -14,13 +21,17 @@ export class AuthController {
     @Body() loginDto: LoginDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    res.clearCookie('edu_token');
-    const user = await this.authService.login(loginDto);
-    res.cookie('edu_token', user.token, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-    return user;
+    try {
+      res.clearCookie('edu_token');
+      const user = await this.authService.login(loginDto);
+      res.cookie('edu_token', user.token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+      return user;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
@@ -32,13 +43,17 @@ export class AuthController {
     @Body() emailDto: EmailDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    res.clearCookie('edu_token');
-    const data = await this.authService.forgotPassword(emailDto);
-    res.cookie('edu_token', data.token, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-    return data;
+    try {
+      res.clearCookie('edu_token');
+      const data = await this.authService.forgotPassword(emailDto);
+      res.cookie('edu_token', data.token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+      return data;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
   @Post('forgot-password/pin')
   async forgotPasswordPin(@Body() code: CodeDto, @Req() req: any) {
@@ -46,7 +61,7 @@ export class AuthController {
       const token = req.cookies?.edu_token;
       return await this.authService.forgotPasswordPin(code, token);
     } catch (error) {
-      return { message: error };
+      throw new BadRequestException(error.message);
     }
   }
   @Post('new-password')
@@ -55,7 +70,7 @@ export class AuthController {
       const token = req.cookies?.edu_token;
       return await this.authService.newPassword(password, token);
     } catch (error) {
-      return { error: error.message };
+      throw new BadRequestException(error.message);
     }
   }
 }
