@@ -1,0 +1,614 @@
+{
+	"info": {
+		"_postman_id": "46518f77-25bd-4b81-bccf-85d4049b3f2d",
+		"name": "edu-crm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40691366",
+		"_collection_link": "https://galactic-firefly-264275.postman.co/workspace/test~9aef45b2-3265-452f-9a8f-3f74f14dd839/collection/40691366-46518f77-25bd-4b81-bccf-85d4049b3f2d?action=share&source=collection_link&creator=40691366"
+	},
+	"item": [
+		{
+			"name": "forgot-password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"farruxzokirov146@gmail.com\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://34.9.20.209:4000/api/auth/forgot-password",
+					"protocol": "http",
+					"host": [
+						"34",
+						"9",
+						"20",
+						"209"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "forgot-password/pin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\":580891\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://34.9.20.209:4000/api/auth/forgot-password/pin",
+					"protocol": "http",
+					"host": [
+						"34",
+						"9",
+						"20",
+						"209"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"forgot-password",
+						"pin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"sobirovf313@gmail.com\",\n    \"password\":\"Donhewbdw78\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logaut",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\":\"Donhewbdw78\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\":\"Donhewbdw78\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://34.9.20.209:4000/auth/new-password",
+					"protocol": "http",
+					"host": [
+						"34",
+						"9",
+						"20",
+						"209"
+					],
+					"port": "4000",
+					"path": [
+						"auth",
+						"new-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/addTecher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"Aziz\",\n  \"lastName\": \"Rustamov\",\n  \"phone\": \"+998901234567\",\n  \"email\": \"farruxzokirov146@gmail.com\",\n  \"password\": \"Password123\",\n  \"gender\": \"Erkak\",\n  \"specialty\": \"Informatika\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/admin/add-teacher",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"add-teacher"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/delete teacher",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.9.20.209:4000/api/admin/delete-teacher/685ecc7dea205810e31ba4d6",
+					"protocol": "http",
+					"host": [
+						"34",
+						"9",
+						"20",
+						"209"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"delete-teacher",
+						"685ecc7dea205810e31ba4d6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/addGroup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Frontend Development 101\",\n  \"subject\": \"Web Development\",\n  \"teacherId\": \"685e833507ade51154630933\",\n  \"schedule\": {\n    \"days\": [\"Monday\", \"Wednesday\", \"Friday\"],\n    \"startTime\": \"10:00\",\n    \"endTime\": \"12:00\"\n  },\n  \"status\": \"active\",\n  \"maxStudents\": 20,\n  \"price\": 150.00,\n  \"startDate\": \"2025-09-01\",\n  \"endDate\": \"2026-01-31\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/admin/addGroup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"addGroup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "teacher/allgrups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/teacher/my_groups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"teacher",
+						"my_groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "students+weakly",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\":\"Donhewbdw78\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/teacher/group/6862a5eee416f01c07f68fd3/weekly",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"teacher",
+						"group",
+						"6862a5eee416f01c07f68fd3",
+						"weekly"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add+davomat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"attendance\": [\n    {\"studentId\": \"68637ac3a3c8d89d0e456040\", \"status\": \"present\"}\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/teacher/group/6862a5eee416f01c07f68fd3/today",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"teacher",
+						"group",
+						"6862a5eee416f01c07f68fd3",
+						"today"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/add/student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"Doniyorjon\",\n  \"lastName\": \"Zokirov\",\n  \"phone\": \"+998901234567\",\n  \"aboutAs\": \"social\",\n  \"outStudent\": \"studying\",\n  \"isActive\": true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/admin/addStudent/6862a5eee416f01c07f68fd3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"addStudent",
+						"6862a5eee416f01c07f68fd3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/remove-/student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"studentId\":\"68638b9d5920bfd45c1d7580\",\n    \"outStudent\":\"gone\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/admin/removeStudent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"removeStudent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/remove/group",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"groupId\":\"6862a5eee416f01c07f68fd3\",\n    \"status\":\"completed\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/admin/removeGroup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"removeGroup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/allgroups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/admin/allGroups?page=1&limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"allGroups"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/allTeacher",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/admin/allTeacher?page=1&limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"allTeacher"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/allStudents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/admin/allStudents?page=1&limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"allStudents"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/addPayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"studentId\": \"68638b9d5920bfd45c1d7580\",\n  \"groupId\": \"64a9f4c10c823fd9c2d3b2a9\",\n  \"amount\": 150000,\n  \"paymentMethod\": \"cash\",\n  \"status\": \"paid\",\n  \"note\": \"Iyul oyi uchun to‘lov\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/paymets/addPayment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"paymets",
+						"addPayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/search/student",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/admin/searchStudent?search=doni&page=1&limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"searchStudent"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "doni"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "teacher/upload/avatar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/home/doniyor/Pictures/Screenshots/Screenshot from 2025-06-30 00-13-22.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/avatar/685ed7e178edb1434c426d51/avatar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"avatar",
+						"685ed7e178edb1434c426d51",
+						"avatar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

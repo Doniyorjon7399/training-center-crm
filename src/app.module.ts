@@ -9,6 +9,8 @@ import config from './config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { AuthGuard } from './common/guards/auth.guard';
+import { PaymetsModule } from './modules/paymets/paymets.module';
+import { AvatarModule } from './modules/avatar/avatar.module';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { AuthGuard } from './common/guards/auth.guard';
     AuthModule,
     AdminModule,
     TeacherModule,
+    PaymetsModule,
+    AvatarModule,
   ],
   controllers: [],
   providers: [

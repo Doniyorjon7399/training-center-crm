@@ -9,9 +9,7 @@ import {
 } from '@nestjs/common';
 import { TeacherService } from './teacher.service';
 import { Request } from 'express';
-import { IdDto } from 'src/dtos/id.dto';
 import { AttendanceStatus } from '@prisma/client';
-import { CreateStudentDto } from 'src/dtos/addStudent.dto';
 
 @Controller('teacher')
 export class TeacherController {
@@ -27,33 +25,25 @@ export class TeacherController {
   }
   @Get('group/:groupId/weekly')
   async getGroupWeeklyAttendance(@Param('groupId') groupId: string) {
-    return await this.teacherService.getStudentWeaklyAll(groupId);
+    try {
+      return await this.teacherService.getStudentWeaklyAll(groupId);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
-  // @Get('group_students/:id')
-  // async groupsStudents(@Param() id: IdDto) {
-  //   try {
-  //     return this.teacherService.groupsStudents(id.id);
-  //   } catch (error) {
-  //     return { message: error.message };
-  //   }
-  // }
   @Post('group/:groupId/today')
   async markTodayAttendance(
     @Param('groupId') groupId: string,
     @Body()
     body: { attendance: { studentId: string; status: AttendanceStatus }[] },
   ) {
-    return await this.teacherService.markTodayAttendance(
-      groupId,
-      body.attendance,
-    );
-  }
-  @Post('addStudents/:id')
-  async addStudents(@Body() studentDto: CreateStudentDto, @Param() id: IdDto) {
     try {
-      return this.teacherService.addStudent(id.id, studentDto);
+      return await this.teacherService.markTodayAttendance(
+        groupId,
+        body.attendance,
+      );
     } catch (error) {
-      return { message: error.message };
+      throw new BadRequestException(error.message);
     }
   }
 }

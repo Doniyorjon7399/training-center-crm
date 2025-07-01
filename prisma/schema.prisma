@@ -73,14 +73,14 @@ model Student {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   firstName String
   lastName String
-  phone String
+  phone String @unique
   aboutAs About @default(other)
   outStudent OutStudent @default(complete)
   isActive Boolean @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  studentGroups StudentGroup[]
-  payments Payment[]
+  studentGroups StudentGroup[] 
+  payments Payment[] 
   attendance Attendance[] 
   @@map("students")
 }
@@ -94,7 +94,7 @@ model Group {
   teacherId String  @db.ObjectId
   studentGroups StudentGroup[] 
   schedule  Schedule
-  status    GroupStatus
+  status    GroupStatus @default(active)
   maxStudents Int
   price     Float
   startDate DateTime
@@ -107,9 +107,9 @@ model Group {
 
 model StudentGroup {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  student   Student  @relation(fields: [studentId], references: [id])
+  student   Student  @relation(fields: [studentId], references: [id],onDelete: Cascade)
   studentId String   @db.ObjectId
-  group     Group    @relation(fields: [groupId], references: [id])
+  group     Group    @relation(fields: [groupId], references: [id],onDelete: Cascade)
   groupId   String   @db.ObjectId
 }
 

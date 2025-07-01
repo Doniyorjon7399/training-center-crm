@@ -1,5 +1,6 @@
 import {
-  ForbiddenException,
+  BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -7,7 +8,6 @@ import { JwtService } from '@nestjs/jwt';
 import { AttendanceStatus } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
 import { CreateStudentDto } from 'src/dtos/addStudent.dto';
-
 @Injectable()
 export class TeacherService {
   constructor(
@@ -141,16 +141,5 @@ export class TeacherService {
     );
 
     return results;
-  }
-  async addStudent(id: string, data: CreateStudentDto) {
-    const { firstName, aboutAs, lastName, phone } = data;
-    const student = this.prisma.student.create({
-      data: {
-        firstName,
-        aboutAs,
-        lastName,
-        phone,
-      },
-    });
   }
 }
